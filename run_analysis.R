@@ -45,6 +45,7 @@ activities <- read.table("UCI HAR Dataset/activity_labels.txt",col.names=c("Acti
 ## bind data with activities labels
 df1 <- merge(activities,test_train,by.y="Labels",by.x="Activity",all.x=TRUE,all.y=FALSE)
 ## melt df1 with activity and subject as id's
+library(reshape2)
 df1Melted <- melt(df1,id=c("Subject","Activity"),measure.vars=names(df1)[c(-1,-2,-3)])
 ## dcast df1Melted with mean as aggregate function
 df1Dcast <- dcast(df1Melted,Subject + Activity ~ variable,fun.aggregate=mean)
